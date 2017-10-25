@@ -42,9 +42,10 @@ This table is provides a non-exhaustive list of basic usage for some extensions.
 |                  |                                                              | GET SWITCH_POSITION # exports $SWITCH_POSITION |
 | REQUIRETOOL      | Exits payload with LED FAIL state if the specified tool is not found in /tools | REQUIRETOOL impacket         |
 | DUCKY_LANG       | Accepts two letter country code to set the HID injection language for subsequent ducky script / QUACK commands | DUCKY_LANG us |
-| CUCUMBER         | Single CPU core mode with governor set to ondemand (Best thermal option for long-term deployments) | CUCUMBER ENABLE                                |
-|                  | Quad CPU core mode with governor set to ondemand (Default behavior. Best overall power/performance) | CUCUMBER DISABLE                               |
-|                  | Quad CPU core mode with governor set to performance (Ludicrous speed. Not intended for long-term deployments) | CUCUMBER PLAID                                 |
+| CUCUMBER         | Single CPU core mode with governor set to ondemand (Best thermal option for long-term deployments) | CUCUMBER ENABLE           |
+|                  | Quad CPU core mode with governor set to ondemand (Default behavior. Best overall power/performance) | CUCUMBER DISABLE         |
+|                  | Quad CPU core mode with governor set to performance (Ludicrous speed. Not intended for long-term deployments) | CUCUMBER PLAID |
+| mac_happy        | Makes Mac happy by correctly setting pid and vid             | mac_happy ATTACKMODE HID ECM_ETHERNET          |
 
 **NOTE**: Extensions replaced bunny_helpers.sh from [Bash Bunny firmware version 1.1](https://www.bashbunny.com/downloads/) onwards.
 
@@ -60,6 +61,7 @@ ATTACKMODE is a bunny script command which specifies which devices to emulate. T
 | SERIAL             | ACM - Abstract Control Model           | Serial Console                                             |
 | ECM_ETHERNET       | ECM - Ethernet Control Model           | Linux/Mac/Android Ethernet Adapter                         |
 | RNDIS_ETHERNET     | RNDIS - Remote Network Drv Int Spec    | Windows (and some Linux) Ethernet Adapter                  |
+| RNDIS_SPEED_XX     | RNDIS_SPEED - Sets speed of RNDIS      | Sets the reported RNDIS speed to XX (where 0 < XX <= 4294967) in kilobytes |
 | STORAGE            | UMS - USB Mass Storage                 | Flash Drive                                                |
 | HID                | HID - Human Interface Device           | Keyboard - Keystroke Injection via Ducky Script            |
 | OFF                | NONE                                   | Disables the USB interface until ATTACKMODE is executed    |
